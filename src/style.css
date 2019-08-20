@@ -1,0 +1,86 @@
+.wrapper{
+    width: 99.9vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding:1em;
+}
+
+
+.table-wrap{
+    height: 100%;
+    border: 2px solid #ccc;
+}
+
+th{
+    padding: 1em;
+    border: 1px solid #ccc;
+    position: relative;
+    font-size: 1.2em;
+}
+.name{
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+
+th .position{
+    position: absolute;
+    top: 2.5em;
+    left: 1em;
+    font-size: 1em;
+}
+
+.fa-edit{
+    position: absolute;
+    right: 1em;
+    top:1em;
+}
+
+tbody{
+    border: 1px solid black;
+}
+
+td{
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding:.5em;
+}
+
+.title{
+    margin-bottom: .5em;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.fa-plus-circle{
+    position: absolute;
+    right: .5em;
+    bottom: .5em;
+    font-size: 1.2em;
+}
+
+.box{
+    flex: 0 0 25%;
+}
+
+input{
+    margin-right: .5em;
+}
+
+.task-description{
+    position: absolute;
+    height: 2em;
+    margin-top: .5em;
+}
+
+.td{
+   position: relative;
+}
