@@ -1,35 +1,46 @@
 import React, {Component} from 'react';
 import './App.css';
-import View from './View.jsx';
 
 // var urlPrefix = 'http://localhost:4000/api';
 
  class App extends Component{
   constructor(props){
     super(props);
-    this.state={
-      activeView: 'add-project',
-      workInputValue: 'Starbucks',
-      coffeeInputValue: 'flat white',
+  
+  }
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    var {updateItem,id,setActiveView} = this.props
+
+    var formData = new FormData(this.form);
+
+    var data = {
+      name: formData.get('name-input'),
+      work: formData.get('work-input'),
+      description: formData.get('description-input'),
     }
+
+    updateItem(id,data);
+    setActiveView('projects');
   }
-  setActiveView = (view)=>{
-    this.setState({activeView:view})
-  }
+
   render(){
+
+    var {name, work, description} = this.props;
+
     return(
       
 
-        <View viewName = "add-project" activeView={this.state.activeView} className="color2">
-          <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
-			    <div className="main">
-          <h3>Post your coffee!</h3>
-          <form>
+          <form onSubmit={this.handleFormSubmit} ref={(el) => {this.form = el}}>
             <div className="form-group">
-              <input type="text" className="form-control" name="name-input" id="name-input" placeholder="Where do you work?" value={this.state.workInputValue}/>
+              <input type="text" className="form-control" name="name-input" id="name-input" placeholder="Where do you work?" defaultValue={name}/>
             </div>
             <div className="form-group">
-              <input type="text" className="form-control" name="description-input" id="description-input" placeholder="What did you make?" value={this.state.coffeeInputValue}/>
+              <input type="text" className="form-control" name="work-input" id="work-input" placeholder="What did you make?" defaultValue={work}/>
+            </div>
+            <div className="form-group">
+              <input type="text" className="form-control" name="description-input" id="description-input" placeholder="What did you make?" defaultValue={description}/>
             </div>
             <div className="form-group">
               <label htmlFor="name-input">Photo</label>
@@ -45,8 +56,6 @@ import View from './View.jsx';
               </div>
               <button type="submit" className="btn btn-primary">Add</button>
             </form>
-			    </div>
-        </View>
 
         
       

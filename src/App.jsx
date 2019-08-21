@@ -16,8 +16,18 @@ var url = 'http://10.2.24.70:4000/api/';
     this.state={
       activeView:'projects',
       items:[],
+      updateItem: null,
     }
     
+  }
+
+  //update project
+
+  setItemToUpdate = (id) => {
+    var foundItem = this.state.items.find((i) => {
+      return i.id === id;
+    });
+    this.setState({updateItem: foundItem});
   }
   
 
@@ -37,7 +47,7 @@ var url = 'http://10.2.24.70:4000/api/';
   }
   //post
   postItem = (data)=>{
-    axios.post(url+'tasks/'+data)
+    axios.post(url+'tasks/',data)
     .then(res=>{
       this.getItem()
     })
@@ -70,7 +80,9 @@ var url = 'http://10.2.24.70:4000/api/';
       var props = {
       ...i,
       key: i.id,
-      
+      updateItem: this.updateItem,
+      setActiveView: this.setActiveView,
+      setItemToUpdate: this.setItemToUpdate,
       };
       return (<Item {...props} />)
       })
@@ -112,7 +124,7 @@ var url = 'http://10.2.24.70:4000/api/';
         <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
       <h3>Edit project</h3>
-        <Update/>
+        <Update {...this.state.updateItem} updateItem={this.updateItem} setActiveView={this.setActiveView}/>
 			</div>
         </View>
         
