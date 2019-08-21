@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 
+import Update from './Update.jsx'
 import axios from 'axios';
-import View from './View';
-import Item from './Item';
+import View from './View.jsx';
+import Item from './Item.jsx';
 
 import './App.css';
 
 var url = 'http://10.2.24.70:4000/api/';
+// var url = 'http://localhost:4000/api/';
 
  class App extends Component{
   constructor(props){
@@ -56,6 +58,7 @@ var url = 'http://10.2.24.70:4000/api/';
   render(){
     return(
       <div className="app">
+
         <View viewName = "projects" activeView={this.state.activeView} className="color1">
         <div className="header"><i className="fas fa-bars"onClick={()=>this.setActiveView('nav')}></i></div>
 			<div className="main">
@@ -102,13 +105,14 @@ var url = 'http://10.2.24.70:4000/api/';
                 </div>
                 <button type="submit" className="btn btn-primary">Add</button>
             </form>
-			</div>
+			    </div>
         </View>
 
         <View viewName = "edit-project" activeView={this.state.activeView} className="color3">
         <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
       <h3>Edit project</h3>
+        <Update/>
 			</div>
         </View>
         
