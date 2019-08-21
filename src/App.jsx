@@ -17,8 +17,18 @@ var url = 'http://10.2.24.70:4000/api/';
     this.state={
       activeView:'projects',
       items:[],
+      updateItem: null,
     }
     
+  }
+
+  //update project
+
+  setItemToUpdate = (id) => {
+    var foundItem = this.state.items.find((i) => {
+      return i.id === id;
+    });
+    this.setState({updateItem: foundItem});
   }
   
 
@@ -72,7 +82,9 @@ var url = 'http://10.2.24.70:4000/api/';
       ...i,
       key: i.id,
       deleteItem: this.deleteItem,
-      
+      updateItem: this.updateItem,
+      setActiveView: this.setActiveView,
+      setItemToUpdate: this.setItemToUpdate,
       };
       return (<Item {...props} />)
       })
@@ -86,7 +98,7 @@ var url = 'http://10.2.24.70:4000/api/';
         <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
         <h3>Post your coffee!</h3>
-          <AddItemForm postItem={this.postItem}/>
+          <AddItemForm postItem={this.postItem} setActiveView={this.setActiveView}  />
 			    </div>
         </View>
 
@@ -94,7 +106,7 @@ var url = 'http://10.2.24.70:4000/api/';
         <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
       <h3>Edit project</h3>
-        <Update/>
+        <Update {...this.state.updateItem} updateItem={this.updateItem} setActiveView={this.setActiveView}/>
 			</div>
         </View>
         

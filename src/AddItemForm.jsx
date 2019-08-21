@@ -18,7 +18,8 @@ class AddItemForm extends Component{
             work:formData.get('work-input'),
             description:formData.get('description-input')
         }
-        this.props.postItem(data)
+        this.props.postItem(data);
+        this.props.setActiveView('projects');
     }
 
     render(){
