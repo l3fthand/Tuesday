@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import Table from 'react-bootstrap/Table'
-import View from './View'
+import Table from 'react-bootstrap/Table';
+import View from './View.jsx';
+import Update from './Update.jsx';
 import './App.css';
+
 
  class App extends Component{
   constructor(props){
@@ -16,6 +18,7 @@ import './App.css';
   render(){
     return(
       <div className="app">
+
         <View viewName = "projects" activeView={this.state.activeView} className="color1">
         <div className="header"><i className="fas fa-bars"onClick={()=>this.setActiveView('nav')}></i></div>
 			<div className="main">
@@ -28,7 +31,7 @@ import './App.css';
 				    <p className="card-text"></p>
 				    <p>
               <i className="fas fa-heart"></i>
-              <i className="fas fa-edit" ></i>
+              <i onClick={() => this.setActiveView('edit-project')} className="fas fa-edit" ></i>
               <i className="fas fa-trash" ></i>
 				    </p>
 				</div>
@@ -61,13 +64,14 @@ import './App.css';
                 </div>
                 <button type="submit" className="btn btn-primary">Add</button>
             </form>
-			</div>
+			    </div>
         </View>
 
         <View viewName = "edit-project" activeView={this.state.activeView} className="color3">
         <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
       <h3>Edit project</h3>
+        <Update/>
 			</div>
         </View>
         
