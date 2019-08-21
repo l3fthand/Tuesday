@@ -21,6 +21,20 @@ import './App.css';
 			<div className="main">
       <h3>Projects</h3>
 
+      {
+      this.state.projects.map((project) => {
+
+      var projectProps = {
+      ...project,
+      key: project.id,
+      deleteProjects: this.deleteProjects,
+      setActiveView: this.setActiveView,
+      setProjectToUpdate: this.setProjectToUpdate
+      };
+      return (<Project {...projectProps} />)
+      })
+      }
+
       <div className="card project">
 				<img className="card-img-top" src="project.jpg" alt="Card image cap" />
 				<div className="card-body">
