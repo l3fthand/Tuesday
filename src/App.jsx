@@ -58,6 +58,20 @@ var url = 'http://10.2.24.70:4000/api/';
 			<div className="main">
       <h3>Projects</h3>
 
+      {
+      this.state.projects.map((project) => {
+
+      var projectProps = {
+      ...project,
+      key: project.id,
+      deleteProjects: this.deleteProjects,
+      setActiveView: this.setActiveView,
+      setProjectToUpdate: this.setProjectToUpdate
+      };
+      return (<Project {...projectProps} />)
+      })
+      }
+
       <div className="card project">
 				<img className="card-img-top" src="project.jpg" alt="Card image cap" />
 				<div className="card-body">
