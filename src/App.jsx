@@ -1,17 +1,53 @@
 import React, {Component} from 'react';
-import Table from 'react-bootstrap/Table';
-import View from './View.jsx';
-import Update from './Update.jsx';
+import axios from 'axios';
+import View from './View';
 import './App.css';
 
+var url = 'http://10.2.24.70:4000/api/';
+// var url = 'http://localhost:4000/api/';
 
  class App extends Component{
   constructor(props){
     super(props);
     this.state={
       activeView:'projects',
+      items:[],
     }
+    
   }
+  
+
+  //GET
+  getItem = ()=>{
+    axios.get(url+'tasks')
+    .then(res=>{
+      this.setState({items:res.data})
+    })
+  }
+  //Put
+  updateItem = (id,data)=>{
+    axios.put(url+'tasks/'+id,data)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  //post
+  postItem = (data)=>{
+    axios.post(url+'tasks/'+data)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  deleteItem = (id)=>{
+    axios.delete(url+'tasks/'+id)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  componentDidMount(){
+    this.getItem()
+  }
+
   setActiveView = (view)=>{
     this.setState({activeView:view})
   }
@@ -23,6 +59,20 @@ import './App.css';
         <div className="header"><i className="fas fa-bars"onClick={()=>this.setActiveView('nav')}></i></div>
 			<div className="main">
       <h3>Projects</h3>
+
+      {/* {
+      this.state.projects.map((project) => {
+
+      var projectProps = {
+      ...project,
+      key: project.id,
+      deleteProjects: this.deleteProjects,
+      setActiveView: this.setActiveView,
+      setProjectToUpdate: this.setProjectToUpdate
+      };
+      return (<Project {...projectProps} />)
+      })
+      } */}
 
       <div className="card project">
 				<img className="card-img-top" src="project.jpg" alt="Card image cap" />
