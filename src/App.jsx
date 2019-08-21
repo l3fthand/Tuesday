@@ -1,15 +1,52 @@
 import React, {Component} from 'react';
-import Table from 'react-bootstrap/Table'
-import View from './View'
+import axios from 'axios';
+import View from './View';
 import './App.css';
+
+var url = 'http://10.2.24.70:4000/api/';
 
  class App extends Component{
   constructor(props){
     super(props);
     this.state={
       activeView:'projects',
+      items:[],
     }
+    
   }
+  
+
+  //GET
+  getItem = ()=>{
+    axios.get(url+'tasks')
+    .then(res=>{
+      this.setState({items:res.data})
+    })
+  }
+  //Put
+  updateItem = (id,data)=>{
+    axios.put(url+'tasks/'+id,data)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  //post
+  postItem = (data)=>{
+    axios.post(url+'tasks/'+data)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  deleteItem = (id)=>{
+    axios.delete(url+'tasks/'+id)
+    .then(res=>{
+      this.getItem()
+    })
+  }
+  componentDidMount(){
+    this.getItem()
+  }
+
   setActiveView = (view)=>{
     this.setState({activeView:view})
   }
