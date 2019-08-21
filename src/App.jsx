@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+
 import axios from 'axios';
 import View from './View';
+import Item from './Item';
+
 import './App.css';
 
 var url = 'http://10.2.24.70:4000/api/';
@@ -56,34 +59,21 @@ var url = 'http://10.2.24.70:4000/api/';
         <View viewName = "projects" activeView={this.state.activeView} className="color1">
         <div className="header"><i className="fas fa-bars"onClick={()=>this.setActiveView('nav')}></i></div>
 			<div className="main">
-      <h3>Projects</h3>
+      <h3></h3>
 
       {
-      this.state.projects.map((project) => {
+      this.state.items.map((i) => {
 
-      var projectProps = {
-      ...project,
-      key: project.id,
-      deleteProjects: this.deleteProjects,
-      setActiveView: this.setActiveView,
-      setProjectToUpdate: this.setProjectToUpdate
+      var props = {
+      ...i,
+      key: i.id,
+      
       };
-      return (<Project {...projectProps} />)
+      return (<Item {...props} />)
       })
       }
 
-      <div className="card project">
-				<img className="card-img-top" src="project.jpg" alt="Card image cap" />
-				<div className="card-body">
-				    <h5 className="card-title"></h5>
-				    <p className="card-text"></p>
-				    <p>
-              <i className="fas fa-heart"></i>
-              <i className="fas fa-edit" ></i>
-              <i className="fas fa-trash" ></i>
-				    </p>
-				</div>
-			</div>
+      
        
 			</div>
         </View>
