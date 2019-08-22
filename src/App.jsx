@@ -71,7 +71,12 @@ var url = 'http://10.2.24.70:4000/api/';
       <div className="app">
 
         <View viewName = "projects" activeView={this.state.activeView} className="color1">
-        <div className="header"><i className="fas fa-bars"onClick={()=>this.setActiveView('nav')}></i></div>
+        <div className="header">
+          <i class="fas fa-coffee"></i>
+          <div className="cupper"><h2>CUPPER</h2></div>
+          <i className="fas fa-plus"onClick={()=>this.setActiveView('nav')}></i>
+        </div>
+        <div className="tagline"><p>Go get a cupper from one of your locals!</p></div>
 			<div className="main">
       <h3></h3>
 
@@ -95,17 +100,27 @@ var url = 'http://10.2.24.70:4000/api/';
 			</div>
         </View>
         <View viewName = "add-project" activeView={this.state.activeView} className="color2">
-        <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
+        <div className="header">
+        <i class="fas fa-coffee"></i>
+          <h3>Post your coffee!</h3>
+          <i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i>
+        </div>
+        <div className="tagline"><p>Share your creation with us!</p></div>
 			<div className="main">
-        <h3>Post your coffee!</h3>
           <AddItemForm postItem={this.postItem} setActiveView={this.setActiveView}  />
 			    </div>
         </View>
 
         <View viewName = "edit-project" activeView={this.state.activeView} className="color3">
-        <div className="header"><i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i></div>
+        <div className="header">
+          <i class="fas fa-coffee"></i>
+          <h3>Edit your post!</h3>
+          <i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i>
+        </div>
+        <div className="tagline"><p>Share your creation with us!</p></div>
+
 			<div className="main">
-      <h3>Edit project</h3>
+      
         <Update {...this.state.updateItem} updateItem={this.updateItem} setActiveView={this.setActiveView}/>
 			</div>
         </View>

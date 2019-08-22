@@ -32,14 +32,14 @@ class AddItemForm extends Component{
               <div className="form-group">
                   <input type="text" className="form-control" name="work-input" id="work-input" placeholder="Where do you work?"/>
               </div>
-              <div className="form-group">
-                  <input type="text" className="form-control" name="description-input" id="description-input" placeholder="What did you make?"/>
+              <div className="form-group description">
+                  <textarea className="form-control" name="description-input" id="description-input" placeholder="What did you make?"/>
               </div>
               {/* <div className="form-group">
                   <label htmlFor="name-input">Photo</label>
                   <input type="text" className="form-control" name="photo-input" id="photo-input" value="project.jpg"/>
               </div> */}
-              <div className="form-group">
+              <div className="form-group drop">
                   <label htmlFor="type-input">What type of cofee beans where used?</label>
                   <select className="form-control" name="type-input" id="type-input" placeholder="Name the bean type used">
                       <option value="1">Arabica</option>

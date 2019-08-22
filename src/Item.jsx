@@ -26,10 +26,11 @@ class Item extends Component{
 				<div className="card-body">
               
 				    <h5 className="card-title">{name}</h5>
-				    <p className="card-text">{work}</p>
+				    <div className="text-box">
+                    <p className="card-text">{work}</p>
                     <p className="card-text">{description}</p>
+                    </div>
 				    <p>
-                    <i className="fas fa-heart"></i>
                     <i onClick={this.editItem} className="fas fa-edit" ></i>
                     <i className="fas fa-trash" onClick={this.handleDeleteClick}></i>
 				    </p>
