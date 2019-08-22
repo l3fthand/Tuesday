@@ -43,16 +43,11 @@ import './App.css';
               <input type="text" className="form-control" name="description-input" id="description-input" placeholder="What did you make?" defaultValue={description}/>
             </div>
             <div className="form-group">
-              <label htmlFor="name-input">Photo</label>
-              <input type="text" className="form-control" name="photo-input" id="photo-input" value="project.jpg"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="type-input">Type</label>
-                <select className="form-control" name="type-input" id="type-input">
-                  <option value="1">Painting</option>
-                  <option value="2">Sculpture</option>
-                  <option value="3">Digital</option>
-                </select>
+                  <label htmlFor="type-input">What type of cofee beans where used?</label>
+                  <select className="form-control" name="type-input" id="type-input" placeholder="Name the bean type used">
+                      <option value="1">Arabica</option>
+                      <option value="2">Robusta</option>
+                  </select>
               </div>
               <button type="submit" className="btn btn-primary">Add</button>
             </form>
