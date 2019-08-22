@@ -3,7 +3,7 @@ import './App.css';
 
 // var urlPrefix = 'http://localhost:4000/api';
 
- class App extends Component{
+ class Update extends Component{
   constructor(props){
     super(props);
   
@@ -31,16 +31,15 @@ import './App.css';
 
     return(
       
-
-      <form onSubmit={this.handleFormSubmit} ref={(el) => {this.form = el}}>
+    <form onSubmit={this.handleFormSubmit} ref={(el) => {this.form = el}}>
       <div className="form-group">
-            <input type="text" className="form-control" name="name-input" id="name-input" placeholder="Your name"/>
+            <input type="text" className="form-control" name="name-input" id="name-input" defaultValue={name} placeholder="Your name"/>
         </div>
         <div className="form-group">
-            <input type="text" className="form-control" name="work-input" id="work-input" placeholder="Where do you work?"/>
+            <input type="text" className="form-control" name="work-input" id="work-input" defaultValue={work} placeholder="Where do you work?"/>
         </div>
         <div className="form-group description">
-            <textarea className="form-control" name="description-input" id="description-input" placeholder="What did you make?"/>
+            <textarea className="form-control" name="description-input" id="description-input" defaultValue={description} placeholder="What did you make?"/>
         </div>
         {/* <div className="form-group">
             <label htmlFor="name-input">Photo</label>
@@ -56,10 +55,8 @@ import './App.css';
         <button type="submit" className="btn btn-primary">Post</button>
     </form>
 
-        
-      
-    )
+    );
   }
 }
 
-export default App;
+export default Update;
