@@ -8,8 +8,8 @@ import AddItemForm from './AddItemForm.jsx'
 
 import './App.css';
 
-var url = 'http://10.2.24.70:4000/api/';
-// var url = 'http://localhost:4000/api/';
+// var url = 'http://10.2.24.70:4000/api/';
+var url = 'http://localhost:4000/api/';
 
  class App extends Component{
   constructor(props){
@@ -17,9 +17,10 @@ var url = 'http://10.2.24.70:4000/api/';
     this.state={
       activeView:'projects',
       items:[],
+      types: [],
+      activeType: null,
       updateItem: null,
     }
-    
   }
 
   //update project
@@ -31,14 +32,31 @@ var url = 'http://10.2.24.70:4000/api/';
     this.setState({updateItem: foundItem});
   }
   
+  setType = (id) => {
+    var type = this.state.types.find((item) => {
+      return item.id == id;
+    });
 
-  //GET
+    type ? this.setState({activeType: type}) : this.setState({activeType: null});
+  }
+
+  //GET 
   getItem = ()=>{
     axios.get(url+'tasks')
     .then(res=>{
       this.setState({items:res.data})
     })
   }
+
+  //get specific type
+
+  getType = () => {
+    axios.get(url+'types')
+    .then(res => {
+      this.setState({types: res.data});
+    });
+  }
+
   //Put
   updateItem = (id,data)=>{
     axios.put(url+'tasks/'+id,data)
@@ -59,20 +77,36 @@ var url = 'http://10.2.24.70:4000/api/';
       this.getItem()
     })
   }
+
   componentDidMount(){
-    this.getItem()
+    this.getItem();
+    this.getType();
   }
 
   setActiveView = (view)=>{
     this.setState({activeView:view})
   }
+
+  updateType = (e) => {
+    this.setType(e.target.dataset.type);
+    this.setActiveView('projects');
+  }
+
   render(){
+
+    var {activeType, items} = this.state;
+    if(activeType){
+      items = items.filter(item => {
+        return item.type == activeType.id;
+      })
+    }
+
     return(
       <div className="app">
 
         <View viewName = "projects" activeView={this.state.activeView} className="color1">
         <div className="header">
-          <i class="fas fa-coffee"></i>
+          <i className="fas fa-coffee"></i>
           <div className="cupper"><h2>CUPPER</h2></div>
           <i className="fas fa-plus"onClick={()=>this.setActiveView('nav')}></i>
         </div>
@@ -81,7 +115,7 @@ var url = 'http://10.2.24.70:4000/api/';
       <h3></h3>
 
       {
-      this.state.items.map((i) => {
+      items.map((i) => {
 
       var props = {
       ...i,
@@ -101,7 +135,7 @@ var url = 'http://10.2.24.70:4000/api/';
         </View>
         <View viewName = "add-project" activeView={this.state.activeView} className="color2">
         <div className="header">
-        <i class="fas fa-coffee"></i>
+        <i className="fas fa-coffee"></i>
           <h3>Post your coffee!</h3>
           <i className="fas fa-times" onClick={()=>this.setActiveView('projects')}></i>
         </div>
@@ -129,8 +163,15 @@ var url = 'http://10.2.24.70:4000/api/';
         <div className="header"><i className="fas fa-times"onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
         <ul className="menu">
-          <li><a onClick={()=>this.setActiveView('projects')}className="color1" href="#">Projects</a></li>
-          <li><a onClick={()=>this.setActiveView('add-project')}className="color3" href="#">Add project</a></li>
+          <li><a data-type="null" onClick={()=>this.setActiveView('projects')}className="color1" href="#">All Projects</a></li>
+          {
+            this.state.types.map(item => {
+              return (<li key={item.id} className="color2">
+                <a data-type={item.id} onClick={this.updateType} href="#">- {item.name}</a>
+              </li>)
+            })
+          }
+          <li><a data-type="null" onClick={()=>this.setActiveView('add-project')}className="color3" href="#">Add project</a></li>
        </ul>	    
 			</div>
         </View>

@@ -16,7 +16,8 @@ class AddItemForm extends Component{
         var data = {
             name:formData.get('name-input'),
             work:formData.get('work-input'),
-            description:formData.get('description-input')
+            description:formData.get('description-input'),
+            type_id: formData.get('type-input'),
         }
         this.props.postItem(data);
         this.props.setActiveView('projects');
@@ -42,8 +43,8 @@ class AddItemForm extends Component{
               <div className="form-group drop">
                   <label htmlFor="type-input">What type of cofee beans where used?</label>
                   <select className="form-control" name="type-input" id="type-input" placeholder="Name the bean type used">
-                      <option value="1">Arabica</option>
-                      <option value="2">Robusta</option>
+                      <option value="1">Robusta</option>
+                      <option value="2">Arabica</option>
                   </select>
               </div>
               <button type="submit" className="btn btn-primary">Post</button>
