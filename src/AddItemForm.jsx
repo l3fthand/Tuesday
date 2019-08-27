@@ -13,14 +13,23 @@ class AddItemForm extends Component{
 
         var formData = new FormData(this.form);
 
-        var data = {
-            name:formData.get('name-input'),
-            work:formData.get('work-input'),
-            description:formData.get('description-input'),
-            type_id: formData.get('type-input'),
-        }
-        this.props.postItem(data);
-        this.props.setActiveView('projects');
+        this.props.uploadPhoto(formData).then(res => {
+
+            var fileName = res.data
+
+            var data = {
+                name:formData.get('name-input'),
+                work:formData.get('work-input'),
+                description:formData.get('description-input'),
+                type_id: formData.get('type-input'),
+                photo: fileName,
+            };
+            this.props.postItem(data);
+            this.props.setActiveView('projects');
+        })
+
+
+  
     }
 
     render(){
@@ -36,10 +45,10 @@ class AddItemForm extends Component{
               <div className="form-group description">
                   <textarea className="form-control" name="description-input" id="description-input" placeholder="What did you make?"/>
               </div>
-              {/* <div className="form-group">
+              <div className="form-group">
                   <label htmlFor="name-input">Photo</label>
-                  <input type="text" className="form-control" name="photo-input" id="photo-input" value="project.jpg"/>
-              </div> */}
+                  <input type="file" className="form-control" name="photo-input" id="photo-input"/>
+              </div>
               <div className="form-group drop">
                   <label htmlFor="type-input">What type of cofee beans where used?</label>
                   <select className="form-control" name="type-input" id="type-input" placeholder="Name the bean type used">

@@ -95,7 +95,7 @@ body{
 
 .card{
 	background-color:#D6CBB8;
-	height: 15em;
+	/* height: 15em; */
 	border: none;
 }
 

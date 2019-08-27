@@ -37,7 +37,18 @@ var url = 'http://localhost:4000/api/';
       return item.id == id;
     });
 
-    type ? this.setState({activeType: type}) : this.setState({activeType: null});
+    if(id != 'null'){
+      this.setState({activeType: type})
+    }else{
+      this.setState({activeType: null})
+    }
+   
+  }
+
+  uploadPhoto = (formData) => {
+
+    return axios.post(url+'upload',formData)
+
   }
 
   //GET 
@@ -97,7 +108,7 @@ var url = 'http://localhost:4000/api/';
     var {activeType, items} = this.state;
     if(activeType){
       items = items.filter(item => {
-        return item.type == activeType.id;
+        return item.type_id == activeType.id;
       })
     }
 
@@ -141,7 +152,7 @@ var url = 'http://localhost:4000/api/';
         </div>
         <div className="tagline"><p>Share your creation with us!</p></div>
 			<div className="main">
-          <AddItemForm postItem={this.postItem} setActiveView={this.setActiveView}  />
+          <AddItemForm postItem={this.postItem} setActiveView={this.setActiveView}  uploadPhoto={this.uploadPhoto}/>
 			    </div>
         </View>
 
@@ -163,7 +174,7 @@ var url = 'http://localhost:4000/api/';
         <div className="header"><i className="fas fa-times"onClick={()=>this.setActiveView('projects')}></i></div>
 			<div className="main">
         <ul className="menu">
-          <li><a data-type="null" onClick={()=>this.setActiveView('projects')}className="color1" href="#">All Projects</a></li>
+          <li><a data-type="null" onClick={this.updateType} className="color1" href="#">All Projects</a></li>
           {
             this.state.types.map(item => {
               return (<li key={item.id} className="color2">
